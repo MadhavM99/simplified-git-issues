@@ -62,7 +62,7 @@ const Issues = () => {
         <h3 className='display-heading'>Displaying issues of {owner}/{repo} repository</h3>
         {displayIssue}
         <div className='section'>
-
+ 
         <ReactPaginate 
         previousLabel= {"Previous"}
         nextLabel = {"Next"}
