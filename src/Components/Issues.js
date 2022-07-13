@@ -8,9 +8,8 @@ import ReactPaginate from 'react-paginate';
 const Issues = () => {
     
     const [issues, setIssues] = useState([]);
-    const [owner, setOwner] = useState("microsoft")
-    const [repo, setRepo] = useState("typescript")
-  const [text, setText] = useState("")
+    const [owner] = useState("microsoft")
+    const [repo] = useState("typescript")
     const [pageNumber, setPageNumber] = useState(0);
 
     const issuesPerPage = 5
@@ -25,29 +24,17 @@ const Issues = () => {
     useEffect(() => {
         fetchIssue()
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    
-        if (!owner || !repo) {
-          alert("Input is invalid")
-        } else {
-          setOwner(owner)
-          setRepo(repo)
-          setText("")
-        }
-      }
-      
+
+
+    // mapping and slicing for displaying the data on the webpage
     const displayIssue= issues
-    .slice(pagesVisited, pagesVisited+issuesPerPage)
-    .map((issue)=>{
-
-
+    .slice(pagesVisited, pagesVisited+issuesPerPage)// only displaying 5 per page
+    .map((issue)=>{// traversing all the elements
+        // Destructuring the useful items from github api
         const{user ,title, id, html_url} = issue
-        
+
         return(
             <>
-            
-
             <ListGroup  className='container'>
             <ListGroupItem  className='d-flex'  key = {id}>
                 <div user-detail>
@@ -56,26 +43,27 @@ const Issues = () => {
                 </div>
                 
                 <h3 className = "issue-title" >{title}</h3>
-                <Button size = "sm" className='btn' href={html_url}>See this issue</Button>
-                
+                <Button size = "sm" className='btn fw-bold' style={{ backgroundColor: "#238636" }} href={html_url}>See this issue</Button> 
             </ListGroupItem>
             </ListGroup>
             </>
         )
     })
-    const pageCount = Math.ceil(issues.length/issuesPerPage);
 
+    // Paginate Functions
+    const pageCount = Math.ceil(issues.length/issuesPerPage);
     const ChangePage = ({selected}) =>{
-        
-        setPageNumber(selected);
-        
+      setPageNumber(selected);
     }
+
   return (
-    <>
+    <>  
+
+        <h3 className='display-heading'>Displaying issues of {owner}/{repo} repository</h3>
         {displayIssue}
         <div className='section'>
+
         <ReactPaginate 
-        
         previousLabel= {"Previous"}
         nextLabel = {"Next"}
         pageCount = {pageCount}
@@ -84,7 +72,7 @@ const Issues = () => {
         previousLinkClassName = {"previousBtn"}
         nextLinkClassName = {"nextBtn"}
         activeLinkClassName = {"paginationActive"}
-    />
+        />
         </div>
         
     </>

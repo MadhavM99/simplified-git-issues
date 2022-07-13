@@ -17,7 +17,8 @@ img{
   
 }
 .btn{
-  
+
+  background-color: #238636;
   margin-left: auto;
   height: fit-content;
   margin-top: 20px;
@@ -37,11 +38,15 @@ img{
  .section{
   margin: auto;
   width: 50%;
-  padding-top: 200px;
+  margin-top: 50px;
  }
 .avatar{
   display: flex;
   align-items: center;
 }
-
+.display-heading{
+  margin-left: 120px;
+  color: rgb(3, 54, 150);
+  justify-content: center;
+}
 
